@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc nghiệm Ngành Nghề</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Trắc Nghiệm Ngành Nghề Việt Nam</div>
+            <div class="nav-links">
+                <a href="/">Trang chủ</a>
+                <a href="/quiz">Làm bài trắc nghiệm</a>
+                <div class="dropdown">
+                    <button class="dropdown-btn">Tài khoản</button>
+                    <div class="dropdown-content">
+                        <a href="/login" id="login-link">Đăng nhập</a>
+                        <a href="/register" id="register-link">Đăng ký</a>
+                        <a href="#" id="admin-link" style="display:none;">Admin</a>
+                        <a href="#" id="logout-link" style="display:none;" onclick="logout()">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Khám Phá Ngành Nghề Phù Hợp Với Bạn</h1>
+            <p>Trắc nghiệm toàn diện về 50 ngành nghề tại Việt Nam</p>
+            <a href="/quiz" class="btn btn-primary">Bắt đầu trắc nghiệm</a>
+        </section>
+
+        <section class="features">
+            <div class="feature-card">
+                <h3>50 Ngành Nghề</h3>
+                <p>Khám phá 50 ngành nghề phổ biến tại Việt Nam</p>
+            </div>
+            <div class="feature-card">
+                <h3>10 Câu Hỏi</h3>
+                <p>Mỗi lần làm bài gồm 10 câu hỏi ngẫu nhiên</p>
+            </div>
+            <div class="feature-card">
+                <h3>Phản Hồi Tức Thì</h3>
+                <p>Nhận kết quả và phân tích chi tiết ngay</p>
+            </div>
+            <div class="feature-card">
+                <h3>Theo Dõi Tiến Độ</h3>
+                <p>Xem kết quả lịch sử của bạn</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Trắc Nghiệm Ngành Nghề. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Trắc Nghiệm Ngành Nghề</div>
+            <div class="nav-links">
+                <a href="/">Trang chủ</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="auth-form">
+            <h2>Đăng Nhập</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            </form>
+            <p>Chưa có tài khoản? <a href="/register">Đăng ký ở đây</a></p>
+            <div id="error-message" class="error-message"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Trắc Nghiệm Ngành Nghề.</p>
+    </footer>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('logged_in', 'true');
+                    localStorage.setItem('is_admin', data.is_admin);
+                    window.location.href = '/quiz';
+                } else {
+                    document.getElementById('error-message').textContent = data.error;
+                }
+            } catch (error) {
+                document.getElementById('error-message').textContent = 'Lỗi kết nối';
+            }
+        });
+    </script>
+</body>
+</html>

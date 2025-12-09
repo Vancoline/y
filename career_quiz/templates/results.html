@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả trắc nghiệm</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Trắc Nghiệm Ngành Nghề</div>
+            <div class="nav-links">
+                <a href="/">Trang chủ</a>
+                <a href="/quiz">Làm bài trắc nghiệm</a>
+                <a href="#" id="logout-link" onclick="logout()">Đăng xuất</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="results-container" class="results-container">
+            <!-- Kết quả sẽ được load ở đây -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Trắc Nghiệm Ngành Nghề.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+</body>
+</html>

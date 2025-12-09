@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Điều Khiển Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Admin - Trắc Nghiệm Ngành Nghề</div>
+            <div class="nav-links">
+                <a href="/">Trang chủ</a>
+                <a href="#" id="logout-link" onclick="logout()">Đăng xuất</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="admin-dashboard">
+            <h1>Bảng Điều Khiển Admin</h1>
+            <div id="admin-container">
+                <table id="users-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên Người Dùng</th>
+                            <th>Số Lần Làm Bài</th>
+                            <th>Điểm Mới Nhất</th>
+                            <th>Điểm Trung Bình</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody">
+                        <!-- Người dùng sẽ được load ở đây -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="detail-container" class="admin-detail" style="display:none;">
+                <button class="btn btn-secondary" onclick="showUsersList()">Quay Lại</button>
+                <h2 id="detail-title"></h2>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Thứ Tự</th>
+                            <th>Điểm</th>
+                            <th>Tổng Số Câu</th>
+                            <th>Tỷ Lệ (%)</th>
+                            <th>Ngày Làm</th>
+                            <th>Chi Tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-tbody">
+                        <!-- Kết quả sẽ được load ở đây -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="answer-detail" class="admin-detail" style="display:none;">
+                <button class="btn btn-secondary" onclick="goBackToResults()">Quay Lại</button>
+                <h2>Chi Tiết Câu Trả Lời</h2>
+                <div id="answer-detail-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Trắc Nghiệm Ngành Nghề.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>
