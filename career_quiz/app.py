@@ -5,9 +5,23 @@ import os
 import json
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///career_quiz.db'
-app.config['SECRET_KEY'] = 'your-secret-key-change-in-production'
+
+# Database configuration - Vercel compatible
+# Priority: DATABASE_URL (PostgreSQL on Vercel) > SQLite (Local development)
+database_url = os.getenv('DATABASE_URL')
+if database_url:
+    # Production: PostgreSQL on Vercel
+    if database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+else:
+    # Development: SQLite locally
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///career_quiz.db'
+
+# Secret key from environment or default
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-change-in-production')
 app.config['JSON_SORT_KEYS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
@@ -343,4 +357,8 @@ if __name__ == '__main__':
             
             db.session.commit()
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Development mode
+    debug_mode = os.getenv('FLASK_ENV') != 'production'
+    port = int(os.getenv('PORT', 5000))
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
+
