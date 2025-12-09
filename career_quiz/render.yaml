@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: career-quiz-app
+    env: python
+    region: singapore
+    plan: free
+    
+    # Build & Start
+    buildCommand: pip install -r requirements.txt && python init_db.py
+    startCommand: gunicorn wsgi:app --bind 0.0.0.0:$PORT
+    
+    # Repository
+    repo: https://github.com/Vancoline/y
+    branch: main
+    rootDir: career_quiz
+    
+    # Environment Variables
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        scope: build
+        # ⚠️ Thêm SECRET_KEY trong Render dashboard
+      - key: DATABASE_URL
+        scope: build
+        # ⚠️ Thêm DATABASE_URL trong Render dashboard
+      
+    # Authdeploy
+    autoDeploy: true
+    
+    # Health Check
+    healthCheckPath: /
+    
+databases:
+  - name: career-quiz-db
+    databaseName: career_quiz
+    user: career_user
+    plan: free
+    region: singapore
+    postgresMajorVersion: 15
